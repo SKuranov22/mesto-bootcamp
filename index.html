@@ -23,80 +23,14 @@
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__button-edit"></button>
                 </div>
-                <h2 class="profile__description">Исследователь океана</h2>
+                <p class="profile__description">Исследователь океана</p>
             
             </div>
-            <button type="button" class="profile__button-add"></button>
-        
+            <button type="button" class="profile__button-add"></button>  
         </section>
 
         <section class="elements">
-
-            <ul class="elements-list">
-                <li class="elements-list__card">
-                    <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements-list__image">
-                    <div class="elements-list__title-container">
-                        <h2 class="elements-list__title">Карачаевск</h2>
-                        <button type="button" class="elements-list__button-like"></button>
-                    </div>
-                </li>
-
-                <li class="elements-list__card">
-                    <img src="./images/mount-elbrus.png" alt="Гора Эльбрус" class="elements-list__image">
-                    <div class="elements-list__title-container">
-                        <h2 class="elements-list__title">Гора Эльбрус</h2>
-                        <button type="button" class="elements-list__button-like"></button>
-                    </div>
-                </li>
-
-                <li class="elements-list__card">
-                    <img src="./images/dombai.jpg" alt="Домбай" class="elements-list__image">
-                    <div class="elements-list__title-container">
-                        <h2 class="elements-list__title">Домбай</h2>
-                        <button type="button" class="elements-list__button-like"></button>
-                    </div>
-                </li>
-
-                <li class="elements-list__card">
-                    <img src="./images/mount-elbrus.png" alt="Гора Эльбрус" class="elements-list__image">
-                    <div class="elements-list__title-container">
-                        <h2 class="elements-list__title">Гора Эльбрус</h2>
-                        <button type="button" class="elements-list__button-like"></button>
-                    </div>
-                </li>
-
-                <li class="elements-list__card">
-                    <img src="./images/dombai.jpg" alt="Домбай" class="elements-list__image">
-                    <div class="elements-list__title-container">
-                        <h2 class="elements-list__title">Домбай</h2>
-                        <button type="button" class="elements-list__button-like"></button>
-                    </div>
-                </li>
-
-                <li class="elements-list__card">
-                    <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements-list__image">
-                    <div class="elements-list__title-container">
-                        <h2 class="elements-list__title">Карачаевск</h2>
-                        <button type="button" class="elements-list__button-like"></button>
-                    </div>
-                </li>
-            </ul>
-
-        </section>
-
-        <section class="edit-form">
-            <div class="edit-form__container">
-    
-                <form class="edit-form__inputs" name="inputs">
-                <h3 class="edit-form__title">Редактировать профиль</h3>
-                <input name="userName" type="text" class="edit-form__input edit-form__input_data_name">
-                <input name="userDescription" type="text" class="edit-form__input edit-form__input_data_description">
-                <button type="submit" class="edit-form__button">Сохранить</button>
-                </form>
-    
-                <button type="button" class="edit-form__button-close"></button>
-    
-            </div>
+            <ul class="elements__list"></ul>
         </section>
 
     </main>
@@ -105,7 +39,65 @@
       <p class="footer__copyrights">© 2023 Mesto</p>
     </footer>
 
+    <template id="template-card">
+        <li class="card">
+    
+            <img src="#" alt="#" class="card__image">
+            <div class="card__title-container">
+                <h2 class="card__title">Карачаевск</h2>
+                <button type="button" class="card__button-like"></button>
+            </div>
+            
+            <button class="card__button-remove"></button>
+    
+        </li>
+    </template>
+
+    <div class="popup popup_profile-edit" >
+        <div class="popup__container">
+          
+            <form class="popup__inputs" name="inputs">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input name="userName" type="text" class="popup__input popup__input_data_name" placeholder="Имя пользователя">
+                <input name="userDescription" type="text" class="popup__input popup__input_data_description" placeholder="Род деятельности">
+                <button type="submit" class="popup__button-save">Сохранить</button>
+            </form>
+
+            <button type="button" class="popup__button-close"></button>
+
+        </div>
+    </div>
+    
+    <div class="popup popup_card-add">
+        <div class="popup__container">
+
+            <form class="popup__inputs" name="inputs">
+                <h2 class="popup__title">Новое место</h2>
+                <input name="placeName" type="text" class="popup__input popup__input_place_name" placeholder="Название">
+                <input name="placeUrl" type="text" class="popup__input popup__input_place_url" placeholder="Ссылка на картинку">
+                <button type="submit" class="popup__button-save">Создать</button>
+            </form>
+
+            <button type="button" class="popup__button-close popup__button-close_card-add"></button>
+
+        </div>
+    </div>
+    
+    <div class="popup popup_scale-image">
+        <div class="popup__figure-container">
+
+            <figure class="popup__figure">
+                <img src="#" class="popup__image" alt="#">
+                <figcaption class="popup__caption"></figcaption>
+            </figure>
+            
+            <button type="button" class="popup__button-close popup__button-close_scale-image"></button>
+
+        </div>
+    </div>
+
     <script src="./scripts/index.js"></script>
     
 </body>
 </html>
+
