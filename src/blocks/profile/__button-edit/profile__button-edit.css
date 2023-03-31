@@ -3,11 +3,11 @@
     width: 24px;
     height: 24px;
     background-image: url(../../../images/button-edit.svg);
-    background-position: center;
+    background-size: contain;
     background-color: transparent;
     background-repeat: no-repeat;
-    background-size: 10px;
-    border: 1px solid #FFFFFF;
+    border: none;
+    display: inline-block;
     transition: .2s;
 }
 
@@ -21,6 +21,5 @@
     .profile__button-edit {
       width: 18px;
       height: 18px;
-      background-size: 7.5px;
     }
 }

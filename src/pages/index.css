@@ -41,7 +41,7 @@
 @import url(../blocks/popup/__button-save/popup__button-save.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__inputs/popup__inputs.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 
@@ -50,6 +50,12 @@
 @import url(../blocks/popup/__figure-container/popup__figure-container.css);
 @import url(../blocks/popup/__figure/popup__figure.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
+
+/* элементы валидации */
+@import url(../blocks/popup/__input/_type/popup__input_type_error.css);
+@import url(../blocks/popup/__input-error/popup__input-error.css);
+@import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../blocks/popup/__button-save/_inactive/popup__button-save_inactive.css);
 
 /* блок footer */
 @import url(../blocks/footer/footer.css);
