@@ -4,6 +4,8 @@ import { popUpProfile,
     profileNameInput, 
     profileDescriptionInput } from './constants.js';
 
+import { closePopUp } from './utils.js';
+
 // Функция отправки формы редактирования с отменой стандартной отправки
 export const sendProfileForm = (evt) => {
     evt.preventDefault();
