@@ -7,8 +7,7 @@ import { popUpProfile,
     profileDescription, 
     placeName, 
     placeUrl, 
-    profileForm, 
-    popUpOpened, 
+    profileForm,  
     popUpOverlay, 
     profileNameInput, 
     profileDescriptionInput, 
@@ -16,7 +15,8 @@ import { popUpProfile,
     popupImage, 
     popUpCard, 
     popUpCardButtonAdd,
-    popUpCardButtonClose, 
+    popUpCardButtonClose,
+    popUpButtonSave,
     popUpImage, 
     popUpImageButtonClose, 
     listCardContainer, 
@@ -24,17 +24,8 @@ import { popUpProfile,
     cardTemplate, 
     initialCards } from './components/constants.js';
 
-import {openPopUp, 
-    closePopUp } from './components/utils.js';
-
-import { sendProfileForm } from './components/modal.js';
-
-import { createElement, 
-    addCard, 
-    renderCards, 
-    openPopupScaleImage } from './components/card.js';
-
-import { showInputError, 
+import { validationConfig,
+    showInputError, 
     hideInputError, 
     isValid, 
     setIventListeners, 
@@ -42,7 +33,17 @@ import { showInputError,
     hasInvalidInput, 
     toggleButtonState } from './components/validate.js';
 
+import { openPopUp, 
+    closePopUp } from './components/utils.js';
 
+import { sendProfileForm, addCard } from './components/modal.js';
+
+import { createElement,  
+    renderCards, 
+    openPopupScaleImage } from './components/card.js';
+
+// Валидация
+enableValidation(validationConfig);
 
 // Вызовы функций открытия, закрытия попапа редактирования профиля
 popUpProfileButtonOpen.addEventListener('click', function() { 
@@ -66,13 +67,3 @@ popUpImageButtonClose.addEventListener('click', () => closePopUp(popUpImage));
 // Отправка данных новой карточки 
 renderCards();
 cardForm.addEventListener('submit', addCard);
-
-// Валидация
-enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button-save',
-    inactiveButtonClass: 'popup__button-save_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-});

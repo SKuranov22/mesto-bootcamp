@@ -9,7 +9,6 @@ const placeName = document.querySelector('.popup__input_place_name'); // наз�
 const placeUrl = document.querySelector('.popup__input_place_url'); // ссылка на место
 
 const profileForm = document.querySelector('.popup__form'); // форма попапа
-const popUpOpened = document.querySelector('.popup_opened'); // класс открытия попапа
 const popUpOverlay = document.querySelector('.popup__overlay'); // область страницы вне попапа
 
 const profileNameInput = document.querySelector('.popup__input_data_name'); // инпут имени попапа редактирования профиля
@@ -60,13 +59,12 @@ const initialCards = [
 
 export { popUpProfile, 
   popUpProfileButtonOpen, 
-  popUpProfileButtonClose, 
+  popUpProfileButtonClose,
   profileName,
   profileDescription, 
   placeName, 
   placeUrl, 
-  profileForm, 
-  popUpOpened, 
+  profileForm,  
   popUpOverlay, 
   profileNameInput, 
   profileDescriptionInput, 

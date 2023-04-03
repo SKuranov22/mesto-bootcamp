@@ -1,17 +1,11 @@
-import { placeName, 
-  placeUrl,  
-  popupCaption, 
+import { popupCaption, 
   popupImage, 
-  popUpCard, 
   popUpImage,  
   listCardContainer, 
-  cardForm, 
   cardTemplate, 
   initialCards } from './constants.js';
 
-
-import { openPopUp, 
-  closePopUp } from './utils.js';
+import { openPopUp } from './utils.js';
 
 // Функция создания элемента с карточкой
 function createElement (data) {
@@ -41,21 +35,6 @@ function createElement (data) {
    
 };
 
-// Функция заполнения карточки
-function addCard (evt) {
-  evt.preventDefault();
-
-  const newPlaceName = placeName.value;
-  const newPlaceUrl = placeUrl.value;
-
-  const newCard = createElement({name: newPlaceName, link: newPlaceUrl});
-
-  listCardContainer.prepend(newCard);
-
-  cardForm.reset();
-  closePopUp(popUpCard);
-}
-
 // Функция добавления карточки в контейнер
 function renderCards () {
   const cards = initialCards.map(createElement);
@@ -71,7 +50,6 @@ function openPopupScaleImage (data) {
   openPopUp(popUpImage);
 }
 
-export {createElement, 
-  addCard, 
+export { createElement,  
   renderCards, 
-  openPopupScaleImage}
+  openPopupScaleImage }
