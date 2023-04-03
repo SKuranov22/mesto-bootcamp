@@ -21,17 +21,13 @@ import { popUpProfile,
     popUpImageButtonClose, 
     listCardContainer, 
     cardForm, 
-    cardTemplate, 
+    cardTemplate,
+    validationConfig,
     initialCards } from './components/constants.js';
 
-import { validationConfig,
-    showInputError, 
-    hideInputError, 
-    isValid, 
-    setIventListeners, 
+import { 
     enableValidation, 
-    hasInvalidInput, 
-    toggleButtonState } from './components/validate.js';
+    cleanFormErrors } from './components/validate.js';
 
 import { openPopUp, 
     closePopUp } from './components/utils.js';
@@ -49,7 +45,9 @@ enableValidation(validationConfig);
 popUpProfileButtonOpen.addEventListener('click', function() { 
     profileNameInput.value = profileName.textContent;
     profileDescriptionInput.value = profileDescription.textContent;
-    openPopUp(popUpProfile)
+
+    cleanFormErrors(popUpProfile, validationConfig);
+    openPopUp(popUpProfile);
 });
   
 popUpProfileButtonClose.addEventListener('click', () => closePopUp(popUpProfile));
@@ -58,7 +56,11 @@ popUpProfileButtonClose.addEventListener('click', () => closePopUp(popUpProfile)
 profileForm.addEventListener('submit', sendProfileForm);
 
 // Вызовы функций открытия, закрытия попапа добавления карточки
-popUpCardButtonAdd.addEventListener('click', () => openPopUp(popUpCard));
+popUpCardButtonAdd.addEventListener('click', function() { 
+    cleanFormErrors(popUpCard, validationConfig);
+    openPopUp(popUpCard);
+});
+
 popUpCardButtonClose.addEventListener('click', () => closePopUp(popUpCard));
 
 // Вызов функции закрытия попапа с увеличенным изображением

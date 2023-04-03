@@ -29,6 +29,16 @@ const listCardContainer = document.querySelector('.elements__list'); // Спис
 const cardForm = popUpCard.querySelector('.popup__form'); // Инпуты с названием карточки и ссылкой на изображение
 const cardTemplate = document.querySelector('#template-card'); // HTML-код карточки, который добавляется в список
 
+// Объект настройки валидации
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
 // Массив с карточками
 const initialCards = [
   {
@@ -77,5 +87,6 @@ export { popUpProfile,
   popUpImageButtonClose, 
   listCardContainer, 
   cardForm, 
-  cardTemplate, 
+  cardTemplate,
+  validationConfig, 
   initialCards };
