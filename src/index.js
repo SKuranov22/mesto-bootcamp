@@ -5,6 +5,7 @@ import { popUpProfile,
     popUpProfileButtonClose, 
     profileName,
     profileDescription, 
+    profileAvatar,
     placeName, 
     placeUrl, 
     profileForm,  
@@ -22,12 +23,17 @@ import { popUpProfile,
     listCardContainer, 
     cardForm, 
     cardTemplate,
-    validationConfig,
-    initialCards } from './components/constants.js';
+    validationConfig } from './components/constants.js';
 
-import { 
-    enableValidation, 
+import { enableValidation, 
     cleanFormErrors } from './components/validate.js';
+
+import { config, 
+    getInitialCards, 
+    setUserCard, 
+    getProfileInfo, 
+    setUserInfo, 
+    getUserAvatar } from './components/api.js'
 
 import { openPopUp, 
     closePopUp } from './components/utils.js';
@@ -38,6 +44,27 @@ import { createElement,
     renderCards, 
     openPopupScaleImage } from './components/card.js';
 
+
+// Вызываем запрос к серверу на получение карточек
+getInitialCards()
+    .then((result) => {
+        renderCards(result);
+    })
+    .catch((err) => {
+      console.log(err); // выводим ошибку в консоль
+    }); 
+
+// Вызываем запрос к серверу на получение информации о пользователе
+getProfileInfo()
+    .then((result) => {
+        profileName.textContent = result.name
+        profileDescription.textContent = result.about
+        profileAvatar.src = result.avatar
+    })
+    .catch((err) => {
+      console.log(err); // выводим ошибку в консоль
+    }); 
+ 
 // Валидация
 enableValidation(validationConfig);
 
@@ -67,5 +94,4 @@ popUpCardButtonClose.addEventListener('click', () => closePopUp(popUpCard));
 popUpImageButtonClose.addEventListener('click', () => closePopUp(popUpImage));
 
 // Отправка данных новой карточки 
-renderCards();
 cardForm.addEventListener('submit', addCard);

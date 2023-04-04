@@ -2,8 +2,7 @@ import { popupCaption,
   popupImage, 
   popUpImage,  
   listCardContainer, 
-  cardTemplate, 
-  initialCards } from './constants.js';
+  cardTemplate } from './constants.js';
 
 import { openPopUp } from './utils.js';
 
@@ -36,7 +35,7 @@ function createElement (data) {
 };
 
 // Функция добавления карточки в контейнер
-function renderCards () {
+function renderCards (initialCards) {
   const cards = initialCards.map(createElement);
   listCardContainer.prepend(...cards);
 }

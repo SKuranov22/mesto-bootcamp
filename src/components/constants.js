@@ -4,6 +4,7 @@ const popUpProfileButtonClose = document.querySelector('.popup__button-close'); 
 
 const profileName = document.querySelector('.profile__name'); // имя профиля
 const profileDescription = document.querySelector('.profile__description'); // описание профиля
+const profileAvatar = document.querySelector('.profile__image'); // аватар профиля
 
 const placeName = document.querySelector('.popup__input_place_name'); // название места
 const placeUrl = document.querySelector('.popup__input_place_url'); // ссылка на место
@@ -39,39 +40,12 @@ const validationConfig = {
   errorClass: 'popup__input-error_active'
 };
 
-// Массив с карточками
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Ереван',
-    link: 'https://images.unsplash.com/photo-1582798144276-d6c2e81b3025?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Мурманск',
-    link: 'https://auroravillage.info/wp-content/uploads/2021/02/dbf7024e-56bd-4bf6-b849-b6310fdadc3b.jpeg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
 export { popUpProfile, 
   popUpProfileButtonOpen, 
   popUpProfileButtonClose,
   profileName,
-  profileDescription, 
+  profileDescription,
+  profileAvatar, 
   placeName, 
   placeUrl, 
   profileForm,  
@@ -88,5 +62,4 @@ export { popUpProfile,
   listCardContainer, 
   cardForm, 
   cardTemplate,
-  validationConfig, 
-  initialCards };
+  validationConfig };
