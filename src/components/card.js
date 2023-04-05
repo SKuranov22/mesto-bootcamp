@@ -96,10 +96,6 @@ function createElement (data) {
 
   // Вызов функции лайка
   likeButton.addEventListener('click', () => handleLike());
-  likeButton.addEventListener('touchstart', () => {
-    handleLike();
-    likeButton.style.opacity = 1;
-  });
   
   // кнопка "увеличить изображение"
   cardImage.addEventListener('click', () => openPopupScaleImage(data));
