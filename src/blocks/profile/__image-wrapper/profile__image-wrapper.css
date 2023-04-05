@@ -1,9 +1,5 @@
 .profile__image-wrapper {
     position: relative;
-    margin-right: 30px;
-    /* border-radius: 50%; */
-    /* height: 120px; */
-    /* width: 120px; */
 }
   
 @media screen and (max-width: 620px) {
