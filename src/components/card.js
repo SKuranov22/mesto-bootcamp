@@ -96,6 +96,14 @@ function createElement (data) {
 
   // Вызов функции лайка
   likeButton.addEventListener('click', () => handleLike());
+  likeButton.addEventListener('touchstart', function() {
+    // Изменяем стиль CSS элемента при нажатии на него
+    likeButton.style.opacity = 0.5;
+  });
+  likeButton.addEventListener('touchend', function() {
+    // Изменяем стиль CSS элемента обратно, когда пользователь отпустит кнопку
+    likeButton.style.opacity = 1;
+  });
   
   // кнопка "увеличить изображение"
   cardImage.addEventListener('click', () => openPopupScaleImage(data));
