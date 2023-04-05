@@ -15,7 +15,10 @@
     <main class="main">
 
         <section class="profile">
-            <img src="<%=require('./images/avatar.png')%>" alt="Изображение профиля" class="profile__image">
+            <div class="profile__image-wrapper">
+                <img src="#" alt="Изображение профиля" class="profile__image">
+                <button type="button" class="profile__image-button-edit"></button>
+              </div>
             <div class="profile__details">
             
                 <div class="profile__container">
@@ -43,8 +46,11 @@
     
             <img src="#" alt="#" class="card__image">
             <div class="card__title-container">
-                <h2 class="card__title">Карачаевск</h2>
-                <button type="button" class="card__button-like"></button>
+                <h2 class="card__title"></h2>
+                <div class="card__like-container">
+                    <button type="button" class="card__button-like"></button>
+                    <span class="card__count-like">0</span>
+                </div>
             </div>
             
             <button class="card__button-remove"></button>
@@ -72,6 +78,21 @@
 
         </div>
     </div>
+
+    <div class="popup popup_avatar-edit">
+        <div class="popup__container popup__overlay">
+
+          <form class="popup__form" name="popupForm" novalidate>
+            <h2 class="popup__title">Обновить аватар</h2>
+
+            <input name="userAvatar" type="url" class="popup__input popup__input_data_avatar" id="userAvatar-input" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error userAvatar-input-error"></span>
+
+            <button type="submit" class="popup__button-save">Сохранить</button>
+          </form>
+          <button type="button" class="popup__button-close popup__button-close_avatar-edit"></button>
+        </div>
+      </div>
     
     <div class="popup popup_card-add">
         <div class="popup__container popup__overlay">

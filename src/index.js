@@ -12,6 +12,7 @@ import { popUpProfile,
     popUpOverlay, 
     profileNameInput, 
     profileDescriptionInput, 
+    profileAvatarInput,
     popupCaption, 
     popupImage, 
     popUpCard, 
@@ -23,7 +24,11 @@ import { popUpProfile,
     listCardContainer, 
     cardForm, 
     cardTemplate,
-    validationConfig } from './components/constants.js';
+    validationConfig, 
+    avatarButtonEdit, 
+    popUpAvatarEdit,
+    popUpAvatarButtonClose, 
+    avatarForm } from './components/constants.js';
 
 import { enableValidation, 
     cleanFormErrors } from './components/validate.js';
@@ -33,12 +38,12 @@ import { config,
     setUserCard, 
     getProfileInfo, 
     setUserInfo, 
-    getUserAvatar } from './components/api.js'
+    setUserAvatar } from './components/api.js'
 
 import { openPopUp, 
     closePopUp } from './components/utils.js';
 
-import { sendProfileForm, addCard } from './components/modal.js';
+import { sendProfileForm, sendAvatarForm, addCard } from './components/modal.js';
 
 import { createElement,  
     renderCards, 
@@ -77,8 +82,23 @@ popUpProfileButtonOpen.addEventListener('click', function() {
     openPopUp(popUpProfile);
 });
   
-popUpProfileButtonClose.addEventListener('click', () => closePopUp(popUpProfile));
+popUpProfileButtonClose.addEventListener('click', () => {
+    closePopUp(popUpProfile)});
   
+// Вызовы функций открытия, закрытия попапа редактирования аватара
+avatarButtonEdit.addEventListener('click', function() { 
+    cleanFormErrors(popUpAvatarEdit, validationConfig);
+    openPopUp(popUpAvatarEdit);
+});
+
+popUpAvatarButtonClose.addEventListener('click', () => {
+    closePopUp(popUpAvatarEdit);
+    avatarForm.reset();
+});
+
+// Вызов функции сохранения изменений данных в форме редактирования аватарки
+avatarForm.addEventListener('submit', sendAvatarForm);
+
 // Вызов функции сохранения изменений данных в форме редактирования
 profileForm.addEventListener('submit', sendProfileForm);
 
@@ -88,7 +108,10 @@ popUpCardButtonAdd.addEventListener('click', function() {
     openPopUp(popUpCard);
 });
 
-popUpCardButtonClose.addEventListener('click', () => closePopUp(popUpCard));
+popUpCardButtonClose.addEventListener('click', () => {
+    closePopUp(popUpCard);
+    cardForm.reset();
+});
 
 // Вызов функции закрытия попапа с увеличенным изображением
 popUpImageButtonClose.addEventListener('click', () => closePopUp(popUpImage));

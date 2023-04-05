@@ -1,3 +1,5 @@
+import { createElement } from "./card.js";
+import { listCardContainer, cardForm } from "./constants.js";
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/wbf-cohort-7',
     headers: {
@@ -27,7 +29,7 @@ const setUserCard = (data) => {
       headers: config.headers,
       body: JSON.stringify({
         name: data.name,
-        link: data.link
+        link: data.link,
       })
     })
       .then(res => {
@@ -35,6 +37,28 @@ const setUserCard = (data) => {
           return res.json()
         }
         return Promise.reject((`Ошибка: ${res.status}`))
+      })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        // добавляем новую карточку в список на странице
+        const newCardElement = createElement(res);
+        listCardContainer.prepend(newCardElement);
+        cardForm.reset();
+      });
+}
+
+const deleteUserCard = (id) => {
+    return fetch(`${config.baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: config.headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
       })
 }
 
@@ -69,19 +93,48 @@ const setUserInfo = (userData) => {
       })
 }
 
-const getUserAvatar = () => {
-    return fetch(`${config.baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
+const putLike = (id) => {
+    return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+      method: 'PUT',
       headers: config.headers
     })
       .then(res => {
         if (res.ok) {
-          return res.json();
+          return res.json()
         }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-    });
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+  }
+
+const deleteLike = (id) => {
+    return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+        method: 'DELETE',
+        headers: config.headers
+    })
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
 }
 
-export { config, getInitialCards, setUserCard, getProfileInfo, setUserInfo, getUserAvatar }
+const setUserAvatar = (userData) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: userData.avatar,
+    })
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+
+export { config, getInitialCards, setUserCard, putLike, deleteLike, getProfileInfo, setUserInfo, deleteUserCard, setUserAvatar }

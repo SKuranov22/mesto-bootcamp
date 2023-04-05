@@ -14,6 +14,7 @@ const popUpOverlay = document.querySelector('.popup__overlay'); // област�
 
 const profileNameInput = document.querySelector('.popup__input_data_name'); // инпут имени попапа редактирования профиля
 const profileDescriptionInput = document.querySelector('.popup__input_data_description'); // инпут описания попапа редактирования профиля
+const profileAvatarInput = document.querySelector('.popup__input_data_avatar'); // инпут url ссылка на аватарку
 
 const popupCaption = document.querySelector('.popup__caption'); // подпись к увеличенному изображению
 const popupImage = document.querySelector('.popup__image'); // попап увеличенного изображения
@@ -29,6 +30,11 @@ const popUpImageButtonClose = document.querySelector('.popup__button-close_scale
 const listCardContainer = document.querySelector('.elements__list'); // Список с карточками
 const cardForm = popUpCard.querySelector('.popup__form'); // Инпуты с названием карточки и ссылкой на изображение
 const cardTemplate = document.querySelector('#template-card'); // HTML-код карточки, который добавляется в список
+
+const avatarButtonEdit = document.querySelector('.profile__image-button-edit'); // кнопка редактирования профиля
+const popUpAvatarEdit = document.querySelector('.popup_avatar-edit'); // попап редактирования аватара профиля
+const avatarForm = popUpAvatarEdit.querySelector('.popup__form'); // Форма с инпутом аватара
+const popUpAvatarButtonClose =  document.querySelector('.popup__button-close_avatar-edit'); // кнопка закрытия попапа автара
 
 // Объект настройки валидации
 const validationConfig = {
@@ -46,6 +52,7 @@ export { popUpProfile,
   profileName,
   profileDescription,
   profileAvatar, 
+  profileAvatarInput,
   placeName, 
   placeUrl, 
   profileForm,  
@@ -62,4 +69,8 @@ export { popUpProfile,
   listCardContainer, 
   cardForm, 
   cardTemplate,
-  validationConfig };
+  validationConfig,
+  avatarButtonEdit, 
+  popUpAvatarEdit, 
+  popUpAvatarButtonClose, 
+  avatarForm };

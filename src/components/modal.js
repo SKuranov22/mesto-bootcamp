@@ -1,8 +1,11 @@
 import { popUpProfile, 
     profileName,
+    profileAvatar,
+    popUpAvatarEdit,
     profileDescription,   
     profileNameInput, 
     profileDescriptionInput,
+    profileAvatarInput,
     placeName, 
     placeUrl, 
     popUpCard, 
@@ -13,7 +16,7 @@ import { closePopUp } from './utils.js';
 
 import { createElement } from './card.js';
 
-import { setUserCard, setUserInfo } from './api.js';
+import { setUserCard, setUserInfo, setUserAvatar } from './api.js';
 
 // Функция отправки формы редактирования с отменой стандартной отправки
 const sendProfileForm = (evt) => {
@@ -27,6 +30,19 @@ const sendProfileForm = (evt) => {
             console.log(err); // выводим ошибку в консоль
         }); 
     closePopUp (popUpProfile);
+};
+
+// Функция отправки обновления аватарки
+const sendAvatarForm = (evt) => {
+    evt.preventDefault();
+    setUserAvatar({avatar: profileAvatarInput.value})
+        .then((result) => {
+            profileAvatar.src = result.avatar
+        })
+        .catch((err) => {
+            console.log(err); // выводим ошибку в консоль
+        }); 
+    closePopUp (popUpAvatarEdit);
 };
 
 // Функция отправки заполненной карточки
@@ -44,4 +60,4 @@ function addCard (evt) {
     closePopUp(popUpCard);       
 }
 
-export { sendProfileForm, addCard }
+export { sendProfileForm, sendAvatarForm, addCard }

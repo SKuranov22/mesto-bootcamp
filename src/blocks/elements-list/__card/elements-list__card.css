@@ -1,8 +1,0 @@
-.elements-list__card {
-    max-width: 100%;
-    background-color: #ffffff;
-    border-radius: 10px;
-    display: grid;
-    grid-template-rows: 282px 1fr;
-    position: relative;
-}
