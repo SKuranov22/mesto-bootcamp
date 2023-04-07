@@ -8,19 +8,21 @@ const config = {
     }
 }
   
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+
+  // если ошибка, отклоняем промис
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
 const getInitialCards = () => {
     return fetch(`${config.baseUrl}/cards`, {
       method: 'GET',
       headers: config.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-    });
+      .then(checkResponse);
 }
 
 const setUserCard = (data) => {
@@ -54,12 +56,7 @@ const deleteUserCard = (id) => {
       method: 'DELETE',
       headers: config.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
+      .then(checkResponse);
 }
 
 const getProfileInfo = () => {
@@ -67,12 +64,7 @@ const getProfileInfo = () => {
       method: 'GET',
       headers: config.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
+      .then(checkResponse)
 }
 
 const setUserInfo = (userData) => {
@@ -84,13 +76,7 @@ const setUserInfo = (userData) => {
         about: userData.about
       })
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(res)
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
+      .then(checkResponse)
 }
 
 const putLike = (id) => {
@@ -98,12 +84,7 @@ const putLike = (id) => {
       method: 'PUT',
       headers: config.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
+      .then(checkResponse)
   }
 
 const deleteLike = (id) => {
@@ -111,12 +92,7 @@ const deleteLike = (id) => {
         method: 'DELETE',
         headers: config.headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+      .then(checkResponse);
 }
 
 const setUserAvatar = (userData) => {
@@ -127,14 +103,7 @@ const setUserAvatar = (userData) => {
       avatar: userData.avatar,
     })
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-  });
+    .then(checkResponse);
 }
 
-export { config, getInitialCards, setUserCard, putLike, deleteLike, getProfileInfo, setUserInfo, deleteUserCard, setUserAvatar }
+export { config, getInitialCards, setUserCard, putLike, deleteLike, getProfileInfo, setUserInfo, deleteUserCard, setUserAvatar, checkResponse }

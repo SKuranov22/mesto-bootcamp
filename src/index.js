@@ -28,7 +28,8 @@ import { popUpProfile,
     avatarButtonEdit, 
     popUpAvatarEdit,
     popUpAvatarButtonClose, 
-    avatarForm } from './components/constants.js';
+    avatarForm, 
+    userId } from './components/constants.js';
 
 import { enableValidation, 
     cleanFormErrors } from './components/validate.js';
@@ -38,7 +39,8 @@ import { config,
     setUserCard, 
     getProfileInfo, 
     setUserInfo, 
-    setUserAvatar } from './components/api.js'
+    setUserAvatar, 
+    checkResponse } from './components/api.js'
 
 import { openPopUp, 
     closePopUp } from './components/utils.js';
@@ -59,12 +61,14 @@ getInitialCards()
       console.log(err); // выводим ошибку в консоль
     }); 
 
+
 // Вызываем запрос к серверу на получение информации о пользователе
 getProfileInfo()
     .then((result) => {
         profileName.textContent = result.name
         profileDescription.textContent = result.about
         profileAvatar.src = result.avatar
+        userId = result._id
     })
     .catch((err) => {
       console.log(err); // выводим ошибку в консоль
@@ -87,13 +91,13 @@ popUpProfileButtonClose.addEventListener('click', () => {
   
 // Вызовы функций открытия, закрытия попапа редактирования аватара
 avatarButtonEdit.addEventListener('click', function() { 
+    avatarForm.reset(); 
     cleanFormErrors(popUpAvatarEdit, validationConfig);
     openPopUp(popUpAvatarEdit);
 });
 
 popUpAvatarButtonClose.addEventListener('click', () => {
     closePopUp(popUpAvatarEdit);
-    avatarForm.reset();
 });
 
 // Вызов функции сохранения изменений данных в форме редактирования аватарки
@@ -104,13 +108,13 @@ profileForm.addEventListener('submit', sendProfileForm);
 
 // Вызовы функций открытия, закрытия попапа добавления карточки
 popUpCardButtonAdd.addEventListener('click', function() { 
+    cardForm.reset();  
     cleanFormErrors(popUpCard, validationConfig);
     openPopUp(popUpCard);
 });
 
 popUpCardButtonClose.addEventListener('click', () => {
     closePopUp(popUpCard);
-    cardForm.reset();
 });
 
 // Вызов функции закрытия попапа с увеличенным изображением

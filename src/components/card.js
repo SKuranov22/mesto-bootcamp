@@ -2,11 +2,18 @@ import { popupCaption,
   popupImage, 
   popUpImage,  
   listCardContainer, 
-  cardTemplate } from './constants.js';
+  cardTemplate, 
+  userId } from './constants.js';
 
 import { openPopUp } from './utils.js';
 
-import { getInitialCards, putLike, deleteLike, setUserCard, deleteUserCard, getProfileInfo } from './api.js';
+import { getInitialCards, 
+  putLike, 
+  deleteLike, 
+  setUserCard, 
+  deleteUserCard, 
+  getProfileInfo, 
+  checkResponse } from './api.js';
 
 // Функция создания элемента с карточкой
 function createElement (data) {
@@ -27,33 +34,16 @@ function createElement (data) {
   const buttonDelete = cardElement.querySelector('.card__button-remove');
 
   // чужую карточку нельзя удалить
-  getProfileInfo()
-  .then((userData) => {
-    if (owner._id !== userData._id) {
-      buttonDelete.style.display = "none";
-    }
-  })
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`);
-  });
+  if (owner._id !== userId) {
+    buttonDelete.style.display = "none";
+  }
 
   // Функция удаления карточки с сервера
   function removeCard() {
-    getProfileInfo()
-    .then((userData) => {
-      if (owner._id === userData._id) {
-        deleteUserCard(cardId)
-        .then(() => {
-          buttonDelete.closest('.card').remove();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (owner._id === userId) {
+        deleteUserCard(cardId);
+        buttonDelete.closest('.card').remove();
       }
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
   }
 
   // Вызов функции удаления

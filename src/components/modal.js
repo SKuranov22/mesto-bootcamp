@@ -57,7 +57,7 @@ function addCard (evt) {
         .catch((err) => {
             console.log(err); // выводим ошибку в консоль
         }); 
-    closePopUp(popUpCard);       
+    closePopUp(popUpCard);     
 }
 
 export { sendProfileForm, sendAvatarForm, addCard }
