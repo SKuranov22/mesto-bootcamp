@@ -91,7 +91,6 @@ popUpProfileButtonClose.addEventListener('click', () => {
   
 // Вызовы функций открытия, закрытия попапа редактирования аватара
 avatarButtonEdit.addEventListener('click', function() { 
-    avatarForm.reset(); 
     cleanFormErrors(popUpAvatarEdit, validationConfig);
     openPopUp(popUpAvatarEdit);
 });
@@ -101,14 +100,16 @@ popUpAvatarButtonClose.addEventListener('click', () => {
 });
 
 // Вызов функции сохранения изменений данных в форме редактирования аватарки
-avatarForm.addEventListener('submit', sendAvatarForm);
+avatarForm.addEventListener('submit', () => {
+    sendAvatarForm();
+    avatarForm.reset(); 
+});
 
 // Вызов функции сохранения изменений данных в форме редактирования
 profileForm.addEventListener('submit', sendProfileForm);
 
 // Вызовы функций открытия, закрытия попапа добавления карточки
-popUpCardButtonAdd.addEventListener('click', function() { 
-    cardForm.reset();  
+popUpCardButtonAdd.addEventListener('click', function() {  
     cleanFormErrors(popUpCard, validationConfig);
     openPopUp(popUpCard);
 });
@@ -121,4 +122,7 @@ popUpCardButtonClose.addEventListener('click', () => {
 popUpImageButtonClose.addEventListener('click', () => closePopUp(popUpImage));
 
 // Отправка данных новой карточки 
-cardForm.addEventListener('submit', addCard);
+cardForm.addEventListener('submit', () => {
+    addCard();
+    cardForm.reset(); 
+});
