@@ -1,5 +1,3 @@
-import { createElement } from "./card.js";
-import { listCardContainer, cardForm } from "./constants.js";
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/wbf-cohort-7',
     headers: {
@@ -25,30 +23,17 @@ const getInitialCards = () => {
       .then(checkResponse);
 }
 
+
 const setUserCard = (data) => {
-    return fetch(`${config.baseUrl}/cards`, {
-      method: 'POST',
-      headers: config.headers,
-      body: JSON.stringify({
-        name: data.name,
-        link: data.link,
-      })
+  return fetch(`${config.baseUrl}/cards`, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: data.name,
+      link: data.link,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject((`Ошибка: ${res.status}`))
-      })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // добавляем новую карточку в список на странице
-        const newCardElement = createElement(res);
-        listCardContainer.prepend(newCardElement);
-        cardForm.reset();
-      });
+  })
+    .then(checkResponse);
 }
 
 const deleteUserCard = (id) => {
@@ -105,5 +90,6 @@ const setUserAvatar = (userData) => {
   })
     .then(checkResponse);
 }
+
 
 export { config, getInitialCards, setUserCard, putLike, deleteLike, getProfileInfo, setUserInfo, deleteUserCard, setUserAvatar, checkResponse }

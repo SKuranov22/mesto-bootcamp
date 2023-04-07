@@ -1,34 +1,32 @@
 // Функция открытия попапа
 const openPopUp = (popup) => {
   popup.classList.add('popup_opened');
-
-  // Навешиваем слушатели событий только один раз
-  const closePopUpOnOverlayClick = () => closePopUp(popup);
-  const closePopUpOnEscapePress = (evt) => {
-    if (evt.key === 'Escape') {
-      closePopUp(popup);
-    }
-  };
-
-  window.addEventListener('keydown', closePopUpOnEscapePress);
-  popup.addEventListener('click', closePopUpOnOverlayClick);
-  popup.querySelector('.popup__overlay').addEventListener('click', (evt) => {
+  // Навешиваем слушатели при открытии попапа
+  document.addEventListener('keydown', closeByEscape);
+  popup.addEventListener('mousedown', () => closePopUp(popup)); 
+  popup.querySelector('.popup__overlay').addEventListener('mousedown', function (evt) {
     evt.stopPropagation();
   });
-
-  // Удаляем слушатели событий при закрытии модального окна
-  const removeListeners = () => {
-    window.removeEventListener('keydown', closePopUpOnEscapePress);
-    popup.removeEventListener('click', closePopUpOnOverlayClick);
-    popup.removeEventListener('click', removeListeners);
-  };
-  popup.addEventListener('click', removeListeners);
 };
 
 // Функция закрытия попапа 
 const closePopUp = (popup) => {
   popup.classList.remove('popup_opened');
+  // Удаляем слушатели при закрытии попапа
+  document.removeEventListener('keydown', closeByEscape);
+  popup.removeEventListener('mousedown', () => closePopUp(popup)); 
+  popup.querySelector('.popup__overlay').removeEventListener('mousedown', function (evt) {
+    evt.stopPropagation();
+  });
 };
 
+// Функция закрытия попапа при нажатии на Esc
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopUp(openedPopup);
+  }
+}
+
 export { openPopUp, 
-  closePopUp }
+  closePopUp, closeByEscape }

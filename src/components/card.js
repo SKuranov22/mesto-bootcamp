@@ -17,6 +17,7 @@ import { getInitialCards,
 
 // Функция создания элемента с карточкой
 function createElement (data) {
+
   const cardElement = cardTemplate.content.cloneNode(true);
 
   // имя карточки
