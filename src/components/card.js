@@ -42,8 +42,10 @@ function createElement (data) {
   // Функция удаления карточки с сервера
   function removeCard() {
     if (owner._id === userId) {
-        deleteUserCard(cardId);
-        buttonDelete.closest('.card').remove();
+        deleteUserCard(cardId)
+          .then(() => {
+            buttonDelete.closest('.card').remove();
+          });
       }
   }
 
