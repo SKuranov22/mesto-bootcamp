@@ -10,6 +10,7 @@ import { popUpProfile,
     placeUrl, 
     popUpCard, 
     cardForm, 
+    avatarForm,
     listCardContainer } from './constants.js';
 
 import { closePopUp } from './utils.js';
@@ -19,6 +20,8 @@ import { createElement } from './card.js';
 import { setUserCard, setUserInfo, setUserAvatar } from './api.js';
 
 import { validationConfig } from './constants.js';
+
+import { cleanFormErrors } from './validate.js';
 
 // Функция отправки формы редактирования с отменой стандартной отправки
 
@@ -36,10 +39,10 @@ const sendProfileForm = (evt) => {
         profileDescription.textContent = result.about;
       })
       .then(() => {
-        cleanFormErrors(popUpProfile, validationConfig); 
+        closePopUp(popUpProfile);
       })
       .then(() => {
-        closePopUp(popUpProfile);
+        cleanFormErrors(popUpProfile, validationConfig); 
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
@@ -57,14 +60,14 @@ const sendAvatarForm = (evt) => {
     submitButton.textContent = 'Сохранение...';
     setUserAvatar({avatar: profileAvatarInput.value})
       .then((result) => {
-        profileAvatar.src = result.avatar
-      })
-      .then(() => {
+        profileAvatar.src = result.avatar;
         avatarForm.reset();
-        cleanFormErrors(popUpAvatarEdit, validationConfig); 
       })
       .then(() => {
         closePopUp(popUpAvatarEdit);
+      })
+      .then(() => {
+        cleanFormErrors(popUpAvatarEdit, validationConfig); 
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль
@@ -88,11 +91,10 @@ function addCard (evt) {
         cardForm.reset();
       })
       .then(() => {
-        cardForm.reset();
-        cleanFormErrors(popUpCard, validationConfig);
+        closePopUp(popUpCard);
       })
       .then(() => {
-        closePopUp(popUpCard);
+        cleanFormErrors(popUpCard, validationConfig);
       })
       .catch((err) => {
         console.log(err); // выводим ошибку в консоль

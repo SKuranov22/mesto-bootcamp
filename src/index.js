@@ -42,7 +42,10 @@ import { config,
     checkResponse } from './components/api.js'
 
 import { openPopUp, 
-    closePopUp, closeByEscape, closeByOverlay } from './components/utils.js';
+    closePopUp, 
+    closeByEscape, 
+    closePopUpHandler, 
+    stopPropagationHandler } from './components/utils.js';
 
 import { sendProfileForm, sendAvatarForm, addCard } from './components/modal.js';
 
@@ -50,7 +53,7 @@ import { createElement,
     renderCards, 
     openPopupScaleImage } from './components/card.js';
 
-let userId = ''; // после получения ответа от сервера присваиваем ей значение
+let userId = ''; // после получения ответа от сервера присваиваем id значение
 
 // Загрузка данных с сервера
 Promise.all([getProfileInfo(), getInitialCards()])
@@ -76,17 +79,11 @@ popUpProfileButtonOpen.addEventListener('click', function() {
     openPopUp(popUpProfile);
 });
   
-popUpProfileButtonClose.addEventListener('click', () => {
-    closePopUp(popUpProfile)});
+popUpProfileButtonClose.addEventListener('click', () => closePopUp(popUpProfile));
   
 // Вызовы функций открытия, закрытия попапа редактирования аватара
-avatarButtonEdit.addEventListener('click', function() { 
-    openPopUp(popUpAvatarEdit);
-});
-
-popUpAvatarButtonClose.addEventListener('click', () => {
-    closePopUp(popUpAvatarEdit);
-});
+avatarButtonEdit.addEventListener('click', () => openPopUp(popUpAvatarEdit));
+popUpAvatarButtonClose.addEventListener('click', () => closePopUp(popUpAvatarEdit));
 
 // Вызов функции сохранения изменений данных в форме редактирования аватарки
 avatarForm.addEventListener('submit', sendAvatarForm);
@@ -95,13 +92,8 @@ avatarForm.addEventListener('submit', sendAvatarForm);
 profileForm.addEventListener('submit', sendProfileForm);
 
 // Вызовы функций открытия, закрытия попапа добавления карточки
-popUpCardButtonAdd.addEventListener('click', () => {  
-    openPopUp(popUpCard);
-});
-
-popUpCardButtonClose.addEventListener('click', () => {
-    closePopUp(popUpCard);
-});
+popUpCardButtonAdd.addEventListener('click', () => openPopUp(popUpCard));
+popUpCardButtonClose.addEventListener('click', () => closePopUp(popUpCard));
 
 // Вызов функции закрытия попапа с увеличенным изображением
 popUpImageButtonClose.addEventListener('click', () => closePopUp(popUpImage));
@@ -109,4 +101,4 @@ popUpImageButtonClose.addEventListener('click', () => closePopUp(popUpImage));
 // Отправка данных новой карточки 
 cardForm.addEventListener('submit', addCard);
 
-export {userId} 
+export { userId } 
