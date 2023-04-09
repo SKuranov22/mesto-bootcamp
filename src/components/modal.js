@@ -37,6 +37,8 @@ const sendProfileForm = (evt) => {
       })
       .then(() => {
         cleanFormErrors(popUpProfile, validationConfig); 
+      })
+      .then(() => {
         closePopUp(popUpProfile);
       })
       .catch((err) => {
@@ -60,6 +62,8 @@ const sendAvatarForm = (evt) => {
       .then(() => {
         avatarForm.reset();
         cleanFormErrors(popUpAvatarEdit, validationConfig); 
+      })
+      .then(() => {
         closePopUp(popUpAvatarEdit);
       })
       .catch((err) => {
@@ -86,6 +90,8 @@ function addCard (evt) {
       .then(() => {
         cardForm.reset();
         cleanFormErrors(popUpCard, validationConfig);
+      })
+      .then(() => {
         closePopUp(popUpCard);
       })
       .catch((err) => {
