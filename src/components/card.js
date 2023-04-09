@@ -2,8 +2,7 @@ import { popupCaption,
   popupImage, 
   popUpImage,  
   listCardContainer, 
-  cardTemplate, 
-  userId } from './constants.js';
+  cardTemplate } from './constants.js';
 
 import { openPopUp } from './utils.js';
 
@@ -14,6 +13,8 @@ import { getInitialCards,
   deleteUserCard, 
   getProfileInfo, 
   checkResponse } from './api.js';
+
+import { userId } from '../index.js';
 
 // Функция создания элемента с карточкой
 function createElement (data) {

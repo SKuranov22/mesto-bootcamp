@@ -3,10 +3,8 @@ const openPopUp = (popup) => {
   popup.classList.add('popup_opened');
   // Навешиваем слушатели при открытии попапа
   document.addEventListener('keydown', closeByEscape);
-  popup.addEventListener('mousedown', () => closePopUp(popup)); 
-  popup.querySelector('.popup__overlay').addEventListener('mousedown', function (evt) {
-    evt.stopPropagation();
-  });
+  popup.addEventListener('mousedown', closePopUp); 
+  popup.querySelector('.popup__overlay').addEventListener('mousedown', closeByOverlay);
 };
 
 // Функция закрытия попапа 
@@ -14,10 +12,8 @@ const closePopUp = (popup) => {
   popup.classList.remove('popup_opened');
   // Удаляем слушатели при закрытии попапа
   document.removeEventListener('keydown', closeByEscape);
-  popup.removeEventListener('mousedown', () => closePopUp(popup)); 
-  popup.querySelector('.popup__overlay').removeEventListener('mousedown', function (evt) {
-    evt.stopPropagation();
-  });
+  popup.removeEventListener('mousedown', closePopUp); 
+  popup.querySelector('.popup__overlay').removeEventListener('mousedown', closeByOverlay);
 };
 
 // Функция закрытия попапа при нажатии на Esc
@@ -28,5 +24,10 @@ function closeByEscape(evt) {
   }
 }
 
+// Функция закрытия попапа при нажатии на оверлэй
+function closeByOverlay (evt) {
+  evt.stopPropagation();
+}
+
 export { openPopUp, 
-  closePopUp, closeByEscape }
+  closePopUp, closeByEscape, closeByOverlay }

@@ -36,8 +36,6 @@ const popUpAvatarEdit = document.querySelector('.popup_avatar-edit'); // поп�
 const avatarForm = popUpAvatarEdit.querySelector('.popup__form'); // Форма с инпутом аватара
 const popUpAvatarButtonClose =  document.querySelector('.popup__button-close_avatar-edit'); // кнопка закрытия попапа автара
 
-let userId = ''; // после получения ответа от сервера присваиваем ей значение
-
 // Объект настройки валидации
 const validationConfig = {
   formSelector: '.popup__form',
@@ -75,5 +73,4 @@ export { popUpProfile,
   avatarButtonEdit, 
   popUpAvatarEdit, 
   popUpAvatarButtonClose, 
-  avatarForm, 
-  userId };
+  avatarForm };

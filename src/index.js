@@ -28,8 +28,7 @@ import { popUpProfile,
     avatarButtonEdit, 
     popUpAvatarEdit,
     popUpAvatarButtonClose, 
-    avatarForm, 
-    userId } from './components/constants.js';
+    avatarForm } from './components/constants.js';
 
 import { enableValidation, 
     cleanFormErrors } from './components/validate.js';
@@ -43,13 +42,15 @@ import { config,
     checkResponse } from './components/api.js'
 
 import { openPopUp, 
-    closePopUp, closeByEscape } from './components/utils.js';
+    closePopUp, closeByEscape, closeByOverlay } from './components/utils.js';
 
 import { sendProfileForm, sendAvatarForm, addCard } from './components/modal.js';
 
 import { createElement,  
     renderCards, 
     openPopupScaleImage } from './components/card.js';
+
+let userId = ''; // после получения ответа от сервера присваиваем ей значение
 
 // Загрузка данных с сервера
 Promise.all([getProfileInfo(), getInitialCards()])
@@ -88,17 +89,10 @@ popUpAvatarButtonClose.addEventListener('click', () => {
 });
 
 // Вызов функции сохранения изменений данных в форме редактирования аватарки
-avatarForm.addEventListener('submit', (evt) => {
-    sendAvatarForm(evt);
-    avatarForm.reset(); 
-    cleanFormErrors(popUpAvatarEdit, validationConfig);
-});
+avatarForm.addEventListener('submit', sendAvatarForm);
 
 // Вызов функции сохранения изменений данных в форме редактирования
-profileForm.addEventListener('submit', (evt) => {
-    sendProfileForm(evt);
-    cleanFormErrors(popUpProfile, validationConfig); 
-});
+profileForm.addEventListener('submit', sendProfileForm);
 
 // Вызовы функций открытия, закрытия попапа добавления карточки
 popUpCardButtonAdd.addEventListener('click', () => {  
@@ -113,8 +107,6 @@ popUpCardButtonClose.addEventListener('click', () => {
 popUpImageButtonClose.addEventListener('click', () => closePopUp(popUpImage));
 
 // Отправка данных новой карточки 
-cardForm.addEventListener('submit', (evt) => {
-    addCard(evt);
-    cardForm.reset(); 
-    cleanFormErrors(popUpCard, validationConfig);
-});
+cardForm.addEventListener('submit', addCard);
+
+export {userId} 
